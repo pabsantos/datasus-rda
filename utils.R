@@ -31,7 +31,25 @@ arrange_datasus_sim <- function() {
                 "V8" ~ "Outros"
             ),
             data_ocorrencia = dmy(DTOBITO),
+            ano_ocorrencia = year(data_ocorrencia),
             idade_vitima = as.numeric(str_sub(IDADE, 2, 3)),
+            faixa_etaria_vitima = cut(
+                idade_vitima,
+                breaks = c(
+                    0, 5, 10, 15, 20, 25, 30, 35, 40,
+                    45, 50, 55, 60, 65, 70, 75, 80, 100
+                ),
+                labels = c(
+                    "0 a 4 anos", "5 a 9 anos", "10 a 14 anos", "15 a 19 anos",
+                    "20 a 24 anos", "25 a 29 anos", "30 a 34 anos", 
+                    "35 a 39 anos", "40 a 44 anos", "45 a 49 anos", 
+                    "50 a 54 anos", "55 a 59 anos", "60 a 64 anos", 
+                    "65 a 69 anos", "70 a 74 anos", "75 a 79 anos",
+                    "Mais de 80 anos"
+                ),
+                include.lowest = TRUE,
+                right = FALSE
+            ),
             sexo_vitima = case_match(
                 SEXO,
                 "1" ~ "Masculino",
@@ -57,8 +75,9 @@ arrange_datasus_sim <- function() {
             ocup_cbo_vitima = as.character(OCUP)
         ) |> 
         select(
-            modal_vitima, data_ocorrencia, idade_vitima, sexo_vitima,
-            escolaridade_vitima, raca_vitima, ocup_cbo_vitima, cod_municipio
+            modal_vitima, data_ocorrencia, ano_ocorrencia, idade_vitima, 
+            faixa_etaria_vitima, sexo_vitima, escolaridade_vitima, raca_vitima,
+            ocup_cbo_vitima, cod_municipio
         )
 }
 
