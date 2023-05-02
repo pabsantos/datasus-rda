@@ -36,4 +36,4 @@ lista_municipios <- create_lista_municipios()
 
 datasus_sim <- join_datasus_municipios()
     
-save(datasus_sim, file = "rda/datasus-sim-2020.rda")
+save(datasus_sim, file = "rda/datasus-sim-2022.rda")
