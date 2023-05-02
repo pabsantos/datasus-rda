@@ -1,5 +1,21 @@
+read_datasus_preliminar <- function(url) {
+    read_csv2(
+        url,
+        col_select = c(
+            "CAUSABAS", "CODMUNOCOR", "DTOBITO", "IDADE",
+            "SEXO", "RACACOR", "ESC", "OCUP"
+        ),
+        col_types = cols(.default = "f")
+        
+    )
+}
+
+join_datasus_db <- function() {
+    bind_rows(datasus_causas_externas, datasus_preliminar)
+}
+
 arrange_datasus_sim <- function() {
-    datasus_causas_externas |> 
+    datasus_total |> 
         as_tibble() |> 
         mutate(cod_modal = str_sub(CAUSABAS, 1, 2)) |> 
         filter(cod_modal %in% paste0("V", seq(0, 8, 1))) |> 

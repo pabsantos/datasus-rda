@@ -16,6 +16,18 @@ datasus_causas_externas <- fetch_datasus(
     )
 )
 
+datasus_url_2021 <- 
+    "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/DO21OPEN.csv"
+
+datasus_url_2022 <- 
+    "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/DO22OPEN.csv"
+
+datasus_preliminar <- 
+    map(c(datasus_url_2021, datasus_url_2022), read_datasus_preliminar) |> 
+    reduce(bind_rows)
+
+datasus_total <- join_datasus_db()
+
 ibge_municipios <- read_ods("data/ibge_lista_municipios.ods", skip = 5)
 
 datasus_transito_sim <- arrange_datasus_sim()
