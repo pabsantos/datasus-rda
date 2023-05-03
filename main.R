@@ -8,7 +8,7 @@ source("utils.R")
 
 datasus_causas_externas <- fetch_datasus(
     year_start = 1996,
-    year_end = 2020,
+    year_end = 2021,
     information_system = "SIM-DOEXT", 
     vars = c(
         "CAUSABAS", "CODMUNOCOR", "DTOBITO", "IDADE", "SEXO", "RACACOR", "ESC",
@@ -16,15 +16,13 @@ datasus_causas_externas <- fetch_datasus(
     )
 )
 
-datasus_url_2021 <- 
-    "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/DO21OPEN.csv"
+# datasus_url_2021 <- 
+#     "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/DO21OPEN.csv"
 
 datasus_url_2022 <- 
     "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SIM/DO22OPEN.csv"
 
-datasus_preliminar <- 
-    map(c(datasus_url_2021, datasus_url_2022), read_datasus_preliminar) |> 
-    reduce(bind_rows)
+datasus_previa <- read_datasus_preliminar(datasus_url_2022)
 
 datasus_total <- join_datasus_db()
 

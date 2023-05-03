@@ -11,7 +11,7 @@ read_datasus_preliminar <- function(url) {
 }
 
 join_datasus_db <- function() {
-    bind_rows(datasus_causas_externas, datasus_preliminar)
+    bind_rows(datasus_causas_externas, datasus_previa)
 }
 
 arrange_datasus_sim <- function() {
