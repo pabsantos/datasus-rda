@@ -73,6 +73,14 @@ arrange_datasus_sim <- function() {
                 "5" ~ "12 anos ou mais"
             ),
             cod_municipio = str_sub(as.character(CODMUNOCOR), 1, 6),
+            nome_regiao = case_match(
+                str_sub(cod_municipio, 1, 1),
+                "1" ~ "Norte",
+                "2" ~ "Nordeste",
+                "3" ~ "Sudeste",
+                "4" ~ "Sul",
+                "5" ~ "Centro-Oeste"
+            ),
             ocup_cbo_vitima = as.character(OCUP)
         ) |> 
         select(
@@ -87,20 +95,20 @@ create_lista_municipios <- function() {
         clean_names() |> 
         as_tibble() |> 
         mutate(
-            cod_regiao = str_sub(uf, 1, 1),
-            nome_regiao = case_match(
-                cod_regiao,
-                "1" ~ "Norte",
-                "2" ~ "Nordeste",
-                "3" ~ "Sudeste",
-                "4" ~ "Sul",
-                "5" ~ "Centro-Oeste"
-            ),
+            # cod_regiao = str_sub(uf, 1, 1),
+            # nome_regiao = case_match(
+            #     cod_regiao,
+            #     "1" ~ "Norte",
+            #     "2" ~ "Nordeste",
+            #     "3" ~ "Sudeste",
+            #     "4" ~ "Sul",
+            #     "5" ~ "Centro-Oeste"
+            # ),
             cod_municipio = str_sub(
                 as.character(codigo_municipio_completo), 1, 6
             )
         ) |> 
-        select(cod_municipio, nome_municipio, nome_uf, nome_regiao)
+        select(cod_municipio, nome_municipio, nome_uf)
 }
 
 join_datasus_municipios <- function() {
