@@ -25,7 +25,7 @@ arrange_datasus_sim <- function() {
                 "V0" ~ "Pedestre",
                 "V1" ~ "Bicicleta",
                 "V2" ~ "Motocicleta",
-                "V3" ~ "Triciclo"
+                "V3" ~ "Triciclo",
                 c("V4", "V5") ~ "Automóvel",
                 "V6" ~ "Caminhão",
                 "V7" ~ "Ônibus",
@@ -86,7 +86,7 @@ arrange_datasus_sim <- function() {
         select(
             modal_vitima, data_ocorrencia, ano_ocorrencia, idade_vitima, 
             faixa_etaria_vitima, sexo_vitima, escolaridade_vitima, raca_vitima,
-            ocup_cbo_vitima, cod_municipio
+            ocup_cbo_vitima, cod_municipio, nome_regiao
         )
 }
 
