@@ -24,7 +24,8 @@ arrange_datasus_sim <- function() {
                 cod_modal,
                 "V0" ~ "Pedestre",
                 "V1" ~ "Bicicleta",
-                c("V2", "V3") ~ "Motocicleta",
+                "V2" ~ "Motocicleta",
+                "V3" ~ "Triciclo"
                 c("V4", "V5") ~ "Automóvel",
                 "V6" ~ "Caminhão",
                 "V7" ~ "Ônibus",
